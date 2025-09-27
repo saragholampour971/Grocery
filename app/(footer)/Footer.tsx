@@ -38,7 +38,7 @@ const Footer = () => {
     >
       {navigations.map((node, index) =>
         <Button key={`navigation-btn-${index}`} variant={'link'} className={'h-full text-black'}>
-          <Link prefetch={false} href={node.to} className={'justify-items-center space-y-1'}>
+          <Link href={node.to} className={'justify-items-center space-y-1'}>
             {node.svg}
             <span className={'block'}>{node.label}</span>
           </Link>

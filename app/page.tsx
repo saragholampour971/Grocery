@@ -1,4 +1,3 @@
-"use server"
 import ExclusiveOffers from "./(exclusive-offers)/ExclusiveOffers";
 import Banner from "./(banner)";
 import {Suspense} from "react";
@@ -13,7 +12,7 @@ export default async function Home() {
   return (
     <main>
       <CustomHeader>
-        <Image src={'/svg/logo.svg'} alt={"logo"} width={40} height={40}/>
+        <Image src={'/svg/logo.svg'} alt={"logo"} width={40} height={40} priority/>
         <h4 className={'font-semibold mx-3'}>Grocery</h4>
       </CustomHeader>
       <CustomBody className={'space-y-[30px]'}>

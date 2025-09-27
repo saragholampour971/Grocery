@@ -9,7 +9,6 @@ export async function fetchWithAuth(url: string, options?: RequestInit) {
       redirect("/login",);
     } else {
       // ✅ Client-side
-      // window.location.href = "/login";
       throw new Error("Unauthorized");
 
     }
@@ -17,7 +16,7 @@ export async function fetchWithAuth(url: string, options?: RequestInit) {
 
   if (!res.ok) {
     const data = await res.json().catch(() => ({}));
-    console.log(data, 'data');
+    console.log(data, 'data', res.status);
     throw new Error(data?.error || "Network error");
   }
 

@@ -8,14 +8,19 @@ export default async function Banner() {
     next: {revalidate: 20},
   })
   const json = await data.json() as BannerResponse;
-  console.log(json, 'json');
 
   return (
     <div className={'px-app-padding'}>
-      <div className={' relative w-full h-[calc(100vw/3)] rounded-md shadow-md'}>
+      <div className={'relative w-full max-h-[200px] h-[calc(100vw/3)] rounded-md shadow-md'}>
         {Array.isArray(json?.data) ?
-          <Image src={json?.data[0]?.imageUrl || ''} alt={'banner'} fill
-                 className={'object-cover rounded-md'}/>
+          <Image
+            src={json?.data[0]?.imageUrl || ''}
+            alt={'banner'}
+            fill
+            priority
+            className={' rounded-md'}
+
+          />
           : null
         }
       </div>

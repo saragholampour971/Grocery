@@ -1,28 +1,41 @@
-"use server"
-import {cookies} from "next/headers";
-import {adminAuth} from "./firebaseAdmin";
-import {QueryClient} from "@tanstack/react-query";
+"use server";
 
-// validate token and return user data
+import {cookies} from "next/headers";
+import * as jose from "jose";
+import {cache} from "react";
+
+const JWKS = jose.createRemoteJWKSet(
+  new URL(
+    "https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com"
+  )
+);
+
+const verifyTokenCached = cache(async (token: string) => {
+  return await jose.jwtVerify(token, JWKS, {
+    algorithms: ["RS256"],
+    audience: process.env.FIREBASE_PROJECT_ID,
+    issuer: `https://securetoken.google.com/${process.env.FIREBASE_PROJECT_ID}`,
+  });
+});
+
 export async function getCurrentUser() {
   try {
     const token = cookies().get("token")?.value;
-    if (!token)
-      return null
+    if (!token) return null;
 
-    console.log('i have token')
-    const decoded = await adminAuth.verifyIdToken(token);
-    console.log('decoded token', decoded);
-    return {uid: decoded.uid, email: decoded.email};
-  } catch (er) {
-    console.log(er, 'ereeeee');
+    const decoded = jose.decodeJwt(token);
+    console.log("Decoded JWT:", decoded);
 
-    return null
+    // ✅ verify با کش
+    const {payload} = await verifyTokenCached(token);
 
+    return {
+      uid: payload.user_id as string,
+      email: payload.email as string,
+      emailVerified: payload.email_verified as boolean,
+    };
+  } catch (err) {
+    console.error("JWT verify error:", err);
+    return null;
   }
-}
-
-export async function prefillUser(queryClient: QueryClient) {
-  const user = await getCurrentUser();
-  queryClient.setQueryData(["user"], user);
 }

@@ -4,10 +4,13 @@ const protectedPaths = ["/cart"];
 
 function handleToken(req: NextRequest,) {
   const pathname = req.nextUrl.pathname;
+  const redirect = req.nextUrl.searchParams.get("redirect");
+
   const token = req.cookies.get("token")?.value;
-  console.log('has token', !!token);
+ 
   if (token) {
-    return null
+    return NextResponse.next();
+
   }
 
   // Skip middleware for login
@@ -17,7 +20,6 @@ function handleToken(req: NextRequest,) {
   const isProtected = protectedPaths.some(path => pathname.startsWith(path));
 
   if (isProtected) {
-    console.log("🔒 No token found, redirecting to login");
 
     const loginUrl = new URL("/login", req.url);
     loginUrl.searchParams.set("redirect", pathname);

@@ -14,9 +14,7 @@ export const cartService = {
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({productId, quantity}),
     });
-    // if (!res.ok) throw new Error("Failed to remove product from cart");
-
-    // return res.json()/**/
+   
   },
 
   // REMOVE product from cart

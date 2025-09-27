@@ -2,7 +2,7 @@ import {auth} from "@/lib/firebase";
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
 
 async function setTokenCookie(token: string) {
-  await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/login`, {
+  return await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/login`, {
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify({token: token}),

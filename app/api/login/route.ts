@@ -11,5 +11,6 @@ export async function POST(req: Request) {
     path: '/',
     maxAge: 3600
   })
+ 
   return res
 }

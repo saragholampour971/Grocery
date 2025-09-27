@@ -11,18 +11,12 @@ import {useRouter, useSearchParams} from "next/navigation";
 const Login = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
-  const redirectTo = useSearchParams().get('redirect');
+  const searchParams = useSearchParams()
+  const redirectTo = searchParams.get('redirect');
 
   const loginMutation = useMutation({
     mutationFn: handleLogin,
-    onSuccess: () => {
-      if (redirectTo) {
-        router.push(redirectTo);
-        router.refresh();
 
-      }
-      alert(`Welcome back`);
-    },
     onError: (err) => {
       console.error(err);
       alert("Login failed");
@@ -57,7 +51,12 @@ const Login = () => {
       if (!data?.email || !data?.password)
         return;
 
-      await authService.login(data.email, data.password);
+      const user = await authService.login(data.email, data.password);
+      console.log(user, 'user', redirectTo);
+      if (redirectTo && user.uid) {
+        router.push(redirectTo);
+
+      }
 
       alert('Login successful: ');
 

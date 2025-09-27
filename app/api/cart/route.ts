@@ -4,9 +4,10 @@ import {adminDb} from "@/lib/firebaseAdmin";
 import {CartResponse, ICartItem} from "./type";
 import {FieldPath} from "firebase-admin/firestore";
 
-export async function GET(): Promise<NextResponse<CartResponse>> {
+export async function GET(req: Request): Promise<NextResponse<CartResponse>> {
 
   const user = await getCurrentUser();
+  console.log(user, 'user from get cart');
   if (!user)
     return NextResponse.json({error: "Unauthorized"}, {status: 401});
 
@@ -14,7 +15,7 @@ export async function GET(): Promise<NextResponse<CartResponse>> {
   // گرفتن cart
   const cartSnapshot = await adminDb
     .collection("users")
-    .doc(user?.uid)
+    .doc("user?.uid")
     .collection("cart")
     .get();
 
