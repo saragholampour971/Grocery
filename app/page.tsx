@@ -5,6 +5,7 @@ import ExclusiveOffersFallback from "./(exclusive-offers)/loading";
 import CustomHeader from "../components/shared/CustomHeader";
 import Image from "next/image";
 import CustomBody from "../components/shared/CustomBody";
+import BannerFallback from "./(banner)/BannerFallback";
 
 export default async function Home() {
 
@@ -16,7 +17,9 @@ export default async function Home() {
         <h4 className={'font-semibold mx-3'}>Grocery</h4>
       </CustomHeader>
       <CustomBody className={'space-y-[30px]'}>
-        <Banner/>
+        <Suspense fallback={<BannerFallback/>}>
+          <Banner/>
+        </Suspense>
         <Suspense fallback={<ExclusiveOffersFallback/>}>
           <ExclusiveOffers/>
         </Suspense>

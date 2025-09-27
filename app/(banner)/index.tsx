@@ -1,11 +1,10 @@
-"use server"
 import React from 'react';
 import Image from "next/image";
 import {BannerResponse} from "@/app/api/banner/type";
 
 export default async function Banner() {
   const data = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/banner`, {
-    next: {revalidate: 20},
+    next: {revalidate: 60},
   })
   const json = await data.json() as BannerResponse;
 
@@ -18,7 +17,7 @@ export default async function Banner() {
             alt={'banner'}
             fill
             priority
-            className={' rounded-md'}
+            className={'rounded-md object-cover'}
 
           />
           : null
