@@ -16,8 +16,9 @@ const ExclusiveOffersList = (props: Props) => {
     <Carousel>
       <CarouselContent className={'pl-app-padding mr-app-padding'}>
         {props?.data?.map((node, index) =>
-          <CarouselItem key={`exclusive-offers-${index}`}
-                        className={'w-[173px] max-w-[173px] h-[249px] !min-h-[249px]'}
+          <CarouselItem
+            key={`exclusive-offers-${index}`}
+            className={'w-[173px] max-w-[173px] h-[249px] !min-h-[249px]'}
           >
             <Card className={' w-full h-full flex flex-col items-stretch '}>
               <div className={'relative w-[90%] h-[100px] mx-auto'}>

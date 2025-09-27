@@ -11,7 +11,7 @@ export default async function ExclusiveOffers() {
     return null
 
   return (
-    <div className={'space-y-5'}>
+    <div className={'space-y-5 mt-[30px]'}>
       <h3 className={'px-app-padding font-semibold'}>Exclusive Offer</h3>
       <ExclusiveOffersList data={data?.data}/>
     </div>
