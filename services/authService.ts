@@ -12,8 +12,13 @@ async function setTokenCookie(token: string) {
 export const authService = {
   async login(email: string, password: string) {
     const {user} = await signInWithEmailAndPassword(auth, email, password);
-    const token = await user.getIdToken();
-    await setTokenCookie(token);
+    const token = await auth.currentUser?.getIdToken();
+    console.log('this is token1', token)
+    if (token) {
+
+      await setTokenCookie(token);
+    }
+
     return user;
   },
 

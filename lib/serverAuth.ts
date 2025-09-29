@@ -1,41 +1,26 @@
-"use server";
+// ✅ CORRECT: Import from the Next.js utility module
+import {cache} from 'react';
 
 import {cookies} from "next/headers";
-import * as jose from "jose";
-import {cache} from "react";
+import {adminAuth} from "./firebaseAdmin";
 
-const JWKS = jose.createRemoteJWKSet(
-  new URL(
-    "https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com"
-  )
-);
 
-const verifyTokenCached = cache(async (token: string) => {
-  return await jose.jwtVerify(token, JWKS, {
-    algorithms: ["RS256"],
-    audience: process.env.FIREBASE_PROJECT_ID,
-    issuer: `https://securetoken.google.com/${process.env.FIREBASE_PROJECT_ID}`,
-  });
-});
+export const getCurrentUser = cache(async () => {
 
-export async function getCurrentUser() {
-  try {
-    const token = cookies().get("token")?.value;
-    if (!token) return null;
+    try {
+      const token = (await cookies()).get("token")?.value;
+      if (!token) return null;
 
-    const decoded = jose.decodeJwt(token);
-    console.log("Decoded JWT:", decoded);
+      const decodedToken = await adminAuth.verifyIdToken(token);
 
-    // ✅ verify با کش
-    const {payload} = await verifyTokenCached(token);
 
-    return {
-      uid: payload.user_id as string,
-      email: payload.email as string,
-      emailVerified: payload.email_verified as boolean,
-    };
-  } catch (err) {
-    console.error("JWT verify error:", err);
-    return null;
+      return {
+        uid: decodedToken.user_id as string,
+        email: decodedToken.email as string,
+      };
+    } catch (err) {
+      console.error("JWT verify error:", err);
+      return null;
+    }
   }
-}
+)
