@@ -22,7 +22,14 @@ const ExclusiveOffersList = (props: Props) => {
           >
             <Card className={' w-full h-full flex flex-col items-stretch '}>
               <div className={'relative w-[90%] h-[100px] mx-auto'}>
-                <Image src={node.imageUrl} alt={node.imageUrl} fill className={'p-2 object-contain object-center'}/>
+                <Image
+                  src={node.imageUrl}
+                  alt={node.imageUrl}
+                  fill
+                  loading={'lazy'}
+                  className={'p-2 object-contain object-center'}
+                />
+
               </div>
 
               <CardTitle className={'!text-[15px] pb-1 pt-3 text-wrap leading-5'}>

@@ -1,5 +1,11 @@
 import React from 'react';
-import ExclusiveOffersList from "./ExclusiveOffersList";
+import dynamic from "next/dynamic";
+import ExclusiveOffersFallback from "./loading";
+
+const ExclusiveOffersList = dynamic(
+  () => import('./ExclusiveOffersList'),
+  {loading: ExclusiveOffersFallback, ssr: true}
+)
 
 export default async function ExclusiveOffers() {
 

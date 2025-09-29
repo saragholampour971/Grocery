@@ -8,13 +8,11 @@ import CustomBody from "../components/shared/CustomBody";
 import BannerFallback from "./(banner)/loading";
 
 export default function Home() {
-
-
   return (
     <main>
       <CustomHeader>
         <Image src={'/svg/logo.svg'} alt={"logo"} width={40} height={40} priority/>
-        <h4 className={'font-semibold mx-3'}>Grocery</h4>
+        <h4>Grocery</h4>
       </CustomHeader>
       <CustomBody>
         <Suspense fallback={<BannerFallback/>}>

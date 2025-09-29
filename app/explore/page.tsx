@@ -44,9 +44,9 @@ export default async function Explore() {
               <div className={'relative aspect-[9/7]'}>
                 <Image
                   fill
-                  priority
                   src={item.imageUrl}
                   alt={item.title}
+                  loading={'lazy'}
                   className={'object-contain p-1'}
                 />
               </div>
