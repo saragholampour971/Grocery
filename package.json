@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "set GLOBAL_AGENT_HTTP_PROXY=http://127.0.0.1:10809 && next dev",
+    "start": "set GLOBAL_AGENT_HTTP_PROXY=http://127.0.0.1:10809 && next start",
     "build": "next build",
-    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
@@ -16,16 +16,17 @@
     "embla-carousel-react": "^8.6.0",
     "firebase": "^12.2.1",
     "firebase-admin": "^13.5.0",
-    "jose": "^6.1.0",
+    "global-agent": "^3.0.0",
     "lucide-react": "^0.543.0",
-    "next": "13.5.4",
-    "react": "^18",
-    "react-dom": "^18",
+    "next": "^15.5.4",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "shadcn": "^3.2.1",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^15.5.4",
     "@shadcn/ui": "^0.0.4",
     "@types/node": "^20",
     "@types/react": "^18",
