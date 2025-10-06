@@ -6,22 +6,29 @@ import {FieldPath} from "firebase-admin/firestore";
 
 export async function GET(req: Request): Promise<NextResponse<CartResponse>> {
 
+  // گرفتن کاربر جاری
   const user = await getCurrentUser();
-  console.log(user, 'user from get cart');
-  if (!user)
+  if (!user) {
     return NextResponse.json({error: "Unauthorized"}, {status: 401});
+  }
+  console.log("user", user);
 
+  const userRef = adminDb.collection("users").doc(user.uid);
+  const userSnapshot = await userRef.get();
+
+  // اگر کاربر وجود نداشت، بساز
+  if (!userSnapshot.exists) {
+    await userRef.set({
+      cart: [], // یا هر فیلد اولیه که میخوای
+    });
+  }
 
   // گرفتن cart
-  const cartSnapshot = await adminDb
-    .collection("users")
-    .doc("user?.uid")
-    .collection("cart")
-    .get();
+  const cartSnapshot = await userRef.collection("cart").get();
 
   if (cartSnapshot.empty) return NextResponse.json({data: []});
 
-  const productIds = cartSnapshot.docs.map(doc => doc.id);
+  const productIds = cartSnapshot.docs.map((doc) => doc.id);
 
   // batch fetch محصولات
   const productsSnap = await adminDb
@@ -30,17 +37,17 @@ export async function GET(req: Request): Promise<NextResponse<CartResponse>> {
     .get();
 
   const productsMap = new Map(
-    productsSnap.docs.map(doc => [doc.id, doc.data()])
+    productsSnap.docs.map((doc) => [doc.id, doc.data()])
   );
 
-  const cart: ICartItem[] = cartSnapshot.docs.map(doc => {
+  const cart: ICartItem[] = cartSnapshot.docs.map((doc) => {
     const productData = productsMap.get(doc.id) || {};
     return {
       productId: doc.id,
       quantity: +doc.data().quantity,
       name: productData.name,
       price: +productData.price,
-      imageUrl: productData.image,
+      imageUrl: productData.imageUrl,
       id: doc.id,
       categoryId: productData.categoryId,
       categoryName: productData.categoryName,
@@ -54,36 +61,39 @@ export async function GET(req: Request): Promise<NextResponse<CartResponse>> {
 
 export async function POST(req: Request) {
 
-  try {
 
-    const user = await getCurrentUser();
-    console.log('user is', user)
-    if (!user) {
-      return NextResponse.json({error: "Unauthorized"}, {status: 401});
-    }
-
-
-    const {productId, quantity} = await req.json();
-
-    const docRef = adminDb
-      .collection("users")
-      .doc("user?.uid")
-      .collection("cart")
-      .doc(productId);
-
-    const docSnap = await docRef.get();
-
-    if (docSnap.exists) {
-      const current = docSnap.data()!.quantity;
-      await docRef.set({quantity: current + quantity}, {merge: true});
-    } else {
-      await docRef.set({quantity});
-    }
-
-    return NextResponse.json({success: true});
-  } catch (error) {
-    return NextResponse.json({error: "Failed to add product to cart"}, {status: 500});
+  const user = await getCurrentUser();
+  if (!user) {
+    return NextResponse.json({error: "Unauthorized"}, {status: 401});
   }
+
+
+  const {productId, quantity} = await req.json();
+
+
+  const cartRef = adminDb
+    .collection("users")
+    .doc(user.uid)
+    .collection("cart")
+    .doc(productId);
+
+  const cartDoc = await cartRef.get();
+
+  if (cartDoc.exists) {
+    const currentQuantity = cartDoc.data()?.quantity || 0;
+    await cartRef.update({
+      quantity: currentQuantity + 1,
+    });
+    console.log(`✅ Updated quantity for ${productId} to ${currentQuantity + 1}`);
+  } else {
+    await cartRef.set({
+      productId,
+      quantity: 1,
+    });
+    console.log(`🆕 Added ${productId} to cart`);
+  }
+  return NextResponse.json({success: true});
+
 }
 
 

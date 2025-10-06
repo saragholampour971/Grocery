@@ -1,5 +1,8 @@
 import admin from "firebase-admin";
+import {HttpsProxyAgent} from "https-proxy-agent";
 
+const PROXY_URL = 'http://127.0.0.1:10809';
+const agent = new HttpsProxyAgent(PROXY_URL);
 
 if (!admin.apps.length) {
   admin.initializeApp({
@@ -9,6 +12,7 @@ if (!admin.apps.length) {
       clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
     }),
     databaseURL: "https://supermarket-e52be.firebaseio.com",
+    httpAgent: agent
   });
 }
 
@@ -24,7 +28,6 @@ async function test() {
     const snap = await docRef.get();
     console.log("gov-Data:", snap.data());
 
-    // console.log("sessionCookie", sessionCookie)
 
   } catch (err: any) {
     console.error("gov-Error:", err.code, err.message);

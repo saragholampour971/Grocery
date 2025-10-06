@@ -16,7 +16,6 @@ export async function fetchWithAuth(url: string, options?: RequestInit) {
 
   if (!res.ok) {
     const data = await res.json().catch(() => ({}));
-    console.log(data, 'data', res.status);
     throw new Error(data?.error || "Network error");
   }
 

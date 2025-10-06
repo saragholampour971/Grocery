@@ -3,27 +3,29 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "set GLOBAL_AGENT_HTTP_PROXY=http://127.0.0.1:10809 && next dev",
-    "start": "set GLOBAL_AGENT_HTTP_PROXY=http://127.0.0.1:10809 && next start",
+    "dev": "next dev",
+    "start": "next start",
     "build": "next build",
     "lint": "next lint"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
     "@tanstack/react-query": "^5.87.4",
+    "@tanstack/react-query-devtools": "^5.90.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.6.0",
     "firebase": "^12.2.1",
     "firebase-admin": "^13.5.0",
-    "global-agent": "^3.0.0",
+    "https-proxy-agent": "^7.0.6",
     "lucide-react": "^0.543.0",
     "next": "^15.5.4",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "shadcn": "^3.2.1",
     "tailwind-merge": "^3.3.1",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^15.5.4",
@@ -32,6 +34,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10",
+    "cross-env": "^10.1.0",
     "eslint": "^8",
     "eslint-config-next": "13.5.4",
     "postcss": "^8",

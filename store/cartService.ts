@@ -14,7 +14,7 @@ export const cartService = {
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({productId, quantity}),
     });
-   
+
   },
 
   // REMOVE product from cart

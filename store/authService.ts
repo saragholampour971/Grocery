@@ -32,4 +32,8 @@ export const authService = {
   async logout() {
     await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/logout`, {method: "POST"});
   },
+  async me() {
+    return await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/me`);
+
+  }
 };

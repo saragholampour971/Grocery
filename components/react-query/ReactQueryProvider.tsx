@@ -17,13 +17,16 @@ export default function ReactQueryProvider({children, dehydratedState}: Props) {
     queryClient = new QueryClient({
       defaultOptions: {
         queries: {
-          staleTime: 5 * 60 * 1000,
+          staleTime: Infinity,
           retry: false,
+          refetchOnWindowFocus: false,
+          refetchOnMount: false,
         },
 
         mutations: {
           retry: false,
           onError: (error) => {
+            console.log('sara', error)
             if (error.message == 'Unauthorized')
               router.push(`/login?redirect=${encodeURIComponent(pathname)}`);
             else {
@@ -31,6 +34,7 @@ export default function ReactQueryProvider({children, dehydratedState}: Props) {
             }
 
           },
+
 
         }
       },

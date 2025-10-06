@@ -3,7 +3,7 @@
 import {useEffect} from "react";
 import {useRouter} from "next/navigation";
 import {useQueryClient} from "@tanstack/react-query";
-import {authService} from "@/services/authService";
+import {authService} from "../../../store/authService";
 
 export default function LogoutPage() {
   const router = useRouter();

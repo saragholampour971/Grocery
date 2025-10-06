@@ -5,7 +5,7 @@ import logo from '@/public/svg/logo.svg'
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {useMutation} from "@tanstack/react-query";
-import {authService} from "@/services/authService";
+import {authService} from "../../../store/authService";
 import {useRouter, useSearchParams} from "next/navigation";
 
 const Login = () => {
@@ -16,7 +16,6 @@ const Login = () => {
 
   const loginMutation = useMutation({
     mutationFn: handleLogin,
-
     onError: (err) => {
       console.error(err);
       alert("Login failed");

@@ -1,6 +1,5 @@
-require('global-agent/bootstrap')
 import {NextResponse} from "next/server";
-import {adminAuth} from "../../../lib/firebaseAdmin";
+import {adminAuth} from "../../../../lib/firebaseAdmin";
 
 
 export async function POST(req: Request) {

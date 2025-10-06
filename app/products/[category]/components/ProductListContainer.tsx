@@ -1,16 +1,14 @@
 import React from 'react';
-import {ProductResponse} from "@/app/api/products/type";
 import {ProductList} from "./ProductList";
 import Image from "next/image";
+import {productsService} from "@/store/productsService";
 
 type Props = {
   categoryId: string;
 }
 
 export default async function ProductListContainer(props: Props) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products/${props.categoryId}`,
-    {next: {revalidate: 60}})
-  const data: ProductResponse = await res.json()
+  const data = await productsService.getProductsByCategoryId(props.categoryId);
 
   if (!data?.data?.length)
     return (

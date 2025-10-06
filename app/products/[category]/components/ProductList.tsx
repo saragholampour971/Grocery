@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
+import {useMutation, useQuery, useQueryClient,} from "@tanstack/react-query";
 import ProductCard from "@/components/shared/ProductCard";
 import type {IProduct} from "@/app/api/products/type";
-import {cartService} from "@/services/cartService";
+import {cartService} from "../../../../store/cartService";
 
 type Props = {
   products: IProduct[];
@@ -12,15 +12,19 @@ type Props = {
 export function ProductList({products}: Props) {
   const queryClient = useQueryClient();
 
-  const {data: cart = []} = useQuery({
+  const {data: myCart} = useQuery({
     queryKey: ["cart"],
     queryFn: cartService.getCart,
   });
+  console.log('my cart', myCart);
 
   const addMutation = useMutation({
     mutationFn: ({productId, quantity}: { productId: string; quantity: number }) =>
       cartService.addToCart(productId, quantity),
-    onSuccess: () => queryClient.invalidateQueries({queryKey: ["cart"]}),
+    onSuccess: () => {
+      alert('Product Added');
+      queryClient.refetchQueries({queryKey: ["cart"]})
+    },
   });
 
   // const removeMutation = useMutation({
@@ -41,9 +45,8 @@ export function ProductList({products}: Props) {
         <ProductCard
           key={`product-${product.id}`}
           product={product}
-          // quantity={getQuantity(product.id)}
-          quantity={0}
-          onAdd={p => addMutation.mutate({productId: p.id, quantity: 1})}
+          quantity={myCart?.data?.find(node => node.productId == product?.id)?.quantity}
+          // onAdd={p => addMutation.mutate({productId: p.id, quantity: 1})}
           // onRemove={p => removeMutation.mutate({ productId: p.id })}
         />
       ))}
