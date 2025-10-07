@@ -2,32 +2,74 @@
 import React from 'react';
 import {Card, CardDescription, CardTitle} from "../ui/card";
 import Image from "next/image";
-import {price} from "../../lib/utils";
+import {price} from "@/lib/utils";
 import AddButton from "./AddButton";
-import {IProduct} from "../../app/api/products/type";
+import {IProduct} from "@/app/api/products/type";
 import MinusButton from "./MinusButton";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {cartService} from "../../store/cartService";
+import {cartService} from "@/service/cartService";
+import {CartResponse} from "@/app/api/cart/type";
 
 type Props = {
   product: IProduct;
   quantity?: number;
-  // onAdd?: (product: IProduct) => void;
 }
 const ProductCard = (props: Props) => {
 
-  const {product, onAdd, quantity} = props;
+  const {product, quantity} = props;
   const queryClient = useQueryClient();
 
   const addMutation = useMutation({
-    mutationFn: () => {
-      return cartService.addToCart(product.id, (quantity || 0) + 1)
+    mutationFn: (prp: { productId: string, quantity: number }) => {
+      return cartService.addToCart(prp.productId, prp.quantity);
     },
-    onSuccess: () => {
-      alert('Product Added');
-      queryClient.refetchQueries({queryKey: ["cart"]})
+    onMutate: async (variables: { productId: string; quantity: number }) => {
+
+      const lastCart = queryClient.getQueryData<CartResponse>(['cart']);
+
+      // Optimistic update
+      queryClient.setQueryData<CartResponse>(['cart'], (prev) => {
+        const copy = [...(prev?.data || [])];  // کپی از آرایه
+        const index = copy.findIndex((node) => node.productId === variables.productId);  // === بهتره
+
+        if (index > -1) {
+          if (variables.quantity > 0) {
+            copy[index] = {...copy[index], quantity: variables.quantity};
+          } else {
+            copy.splice(index, 1);
+          }
+        }
+
+        return {data: copy};
+      });
+
+      return {lastCart};  // context برای rollback
+    },
+
+
+    onSettled: (data, error, variables, onMutateResult, context) => {
+      if (onMutateResult?.lastCart && error) {
+        queryClient.setQueryData(['cart'], onMutateResult?.lastCart);
+        queryClient.invalidateQueries({queryKey: ['cart']});
+      }
+      // if new product added to cart we need to reFetch cart to
+      // join cart with product table and get all field of that product in cart
+      if ((variables.quantity == 1 && !quantity)) {
+        queryClient.invalidateQueries({queryKey: ['cart']});
+
+      }
     },
   });
+
+  const onIncrease = () => {
+    addMutation.mutate({productId: product.id, quantity: (quantity || 0) + 1})
+  }
+  const onDecrease = () => {
+    if (Number(quantity || 0) > 0) {
+      addMutation.mutate({productId: product.id, quantity: (quantity || 0) - 1})
+    }
+  }
+
   return (
     <Card className={'w-[173px] max-w-[173px] h-[249px] !min-h-[249px] flex flex-col shrink-0 items-stretch '}>
       <div className={'relative w-[90%] h-[100px] mx-auto'}>
@@ -41,7 +83,11 @@ const ProductCard = (props: Props) => {
       <p className={'font-semibold mb-1'}>{price(product.price)}</p>
       {quantity ?
         <div className={'flex items-center justify-end w-full gap-x-3 '}>
-          <AddButton className={'!w-6 !h-6 !rounded-md'} onClick={() => addMutation.mutate(product)}/>
+          <AddButton
+            variant={'outline'}
+            className={'!w-[25px] !h-[25px] !rounded-md'}
+            onClick={onIncrease}
+          />
           {addMutation.status == "pending" ?
             <svg aria-hidden="true" className="size-4 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
                  viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -53,10 +99,17 @@ const ProductCard = (props: Props) => {
                 fill="currentFill"/>
             </svg>
             : quantity}
-          <MinusButton className={'!w-6 !h-6 !rounded-md'}/>
+          <MinusButton
+            className={'!w-[25px] !h-[25px] !rounded-md'}
+            variant={'outline'}
+            onClick={onDecrease}
+          />
         </div> :
 
-        <AddButton onClick={() => addMutation.mutate()}/>
+        <AddButton
+          className={'ml-auto'}
+          onClick={() => addMutation.mutate({productId: product?.id, quantity: 1})}
+        />
       }
     </Card>
 

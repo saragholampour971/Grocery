@@ -2,8 +2,8 @@
 
 import {ReactNode, useEffect} from 'react';
 import {useQueryClient} from '@tanstack/react-query';
-import {cartService} from "@/store/cartService";
-import useUserStore from "@/store/store/userStore";
+import useUserStore from "@/lib/store/userStore";
+import {cartService} from "@/service/cartService";
 
 interface CartPrefetchProviderProps {
   children: ReactNode;

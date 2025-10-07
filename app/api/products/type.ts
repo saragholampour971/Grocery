@@ -1,4 +1,4 @@
-import {ApiResponse} from "../../../lib/globalTypes";
+import {ApiResponse} from "@/lib/globalTypes";
 
 export interface IProduct {
   id: string

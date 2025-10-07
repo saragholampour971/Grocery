@@ -5,8 +5,8 @@ import logo from '@/public/svg/logo.svg'
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {useMutation} from "@tanstack/react-query";
-import {authService} from "../../../store/authService";
 import {useRouter, useSearchParams} from "next/navigation";
+import {authService} from "../../../service/authService";
 
 const Login = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -51,7 +51,6 @@ const Login = () => {
         return;
 
       const user = await authService.login(data.email, data.password);
-      console.log(user, 'user', redirectTo);
       if (redirectTo && user.uid) {
         router.push(redirectTo);
 

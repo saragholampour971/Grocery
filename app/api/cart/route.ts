@@ -71,26 +71,24 @@ export async function POST(req: Request) {
   const {productId, quantity} = await req.json();
 
 
-  const cartRef = adminDb
+  const productInCartRef = adminDb
     .collection("users")
     .doc(user.uid)
     .collection("cart")
     .doc(productId);
 
-  const cartDoc = await cartRef.get();
-
-  if (cartDoc.exists) {
-    const currentQuantity = cartDoc.data()?.quantity || 0;
-    await cartRef.update({
-      quantity: currentQuantity + 1,
+  const productRef = await productInCartRef.get();
+  if (productRef.exists && quantity == 0) {
+    await productInCartRef.delete()
+  } else if (productRef.exists) {
+    await productInCartRef.update({
+      quantity: quantity || 0,
     });
-    console.log(`✅ Updated quantity for ${productId} to ${currentQuantity + 1}`);
   } else {
-    await cartRef.set({
+    await productInCartRef.set({
       productId,
-      quantity: 1,
+      quantity,
     });
-    console.log(`🆕 Added ${productId} to cart`);
   }
   return NextResponse.json({success: true});
 

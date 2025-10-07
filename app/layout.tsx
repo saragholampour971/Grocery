@@ -6,8 +6,8 @@ import Footer from "./(footer)/Footer";
 import ReactQueryProvider from "../components/react-query/ReactQueryProvider";
 import {PropsWithChildren} from "react";
 import {CartPrefetchProvider} from "../components/react-query/CartPrefetchProvider";
-import {ReactQueryDevtools} from '@tanstack/react-query-devtools';
 import LoggedInUserProvider from "../components/react-query/LoggedInUserProvider";
+import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
 
 const inter = Inter({subsets: ['latin']})
 

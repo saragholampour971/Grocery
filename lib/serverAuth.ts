@@ -1,10 +1,8 @@
 import {cookies} from "next/headers";
 import {adminAuth} from "./firebaseAdmin";
-import {cache} from 'react'
 
 
-export const getCurrentUser = cache(async () => {
-  console.log('we are in cache func')
+export const getCurrentUser = (async () => {
   try {
     const token = (await cookies()).get("token")?.value;
     if (!token) return null;

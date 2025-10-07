@@ -7,7 +7,7 @@ function handleToken(req: NextRequest,) {
   const redirect = req.nextUrl.searchParams.get("redirect");
 
   const token = req.cookies.get("token")?.value;
- 
+
   if (token) {
     return NextResponse.next();
 
@@ -30,18 +30,7 @@ function handleToken(req: NextRequest,) {
 
 }
 
-// function handleRedirectSearchParams(req: NextRequest) {
-//   const redirectParam = req.nextUrl.searchParams.get("redirect"); // query param redirect
-//   console.log(redirectParam, 'redirectParam');
-//   if (redirectParam) {
-//     const absoluteUrl = new URL(redirectParam, req.url);
-//     return NextResponse.redirect(absoluteUrl);
-//   }
-//   return null
-// }
-
 export function middleware(req: NextRequest) {
-  console.log('from middleware', req.nextUrl.pathname, req.nextUrl.searchParams.get('redirect'));
   const middlewares = [handleToken];
 
   for (const middleware of middlewares) {
@@ -51,12 +40,8 @@ export function middleware(req: NextRequest) {
 
   return NextResponse.next();
 
-
 }
 
 export const config = {
   matcher: ["/cart/:path*", "/login/:path*"],
-  // matcher: [
-  //   '/((?!_next|api|static|public|favicon.ico|.*\\.(?:jpg|jpeg|png|svg|gif|ico|css|js)).*)',
-  // ]
 };

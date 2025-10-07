@@ -1,7 +1,7 @@
 "use client"
 import React, {forwardRef} from 'react';
 import {Button, ButtonProps} from "../ui/button";
-import {cn} from "../../lib/utils";
+import {cn} from "@/lib/utils";
 
 const AddButton = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     const {className, ...rest} = props
