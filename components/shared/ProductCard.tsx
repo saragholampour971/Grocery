@@ -52,6 +52,12 @@ const ProductCard = (props: Props) => {
         queryClient.setQueryData(['cart'], onMutateResult?.lastCart)
         queryClient.invalidateQueries({ queryKey: ['cart'] })
       }
+      // if new product added to cart we need to reFetch cart to
+      // join cart with product table and get all field of that product in cart
+      else if (variables.quantity == 1 && !quantity) {
+        alert(2)
+        queryClient.invalidateQueries({ queryKey: ['cart'] })
+      }
     },
   })
 

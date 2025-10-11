@@ -1,5 +1,5 @@
-import ProductCardFallback from '@/components/shared/ProductCardFallback'
-import CustomBody from '@/components/shared/CustomBody'
+import ProductCardFallback from '../../../components/shared/ProductCardFallback'
+import CustomBody from '../../../components/shared/CustomBody'
 
 export default function ProductsFallback() {
   return (

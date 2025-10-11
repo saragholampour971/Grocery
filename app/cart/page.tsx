@@ -5,7 +5,7 @@ import CustomHeader from '@/components/shared/CustomHeader'
 import CustomBody from '@/components/shared/CustomBody'
 import NoData from './no-data'
 import { cartService } from '@/service/cartService'
-import ProductsFallback from '../products/[category]/components/ProductsFallback'
+import ProductsFallback from '../products/[category]/loading'
 
 export default function Cart() {
   const { data: cartValue, isLoading } = useQuery({

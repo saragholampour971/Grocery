@@ -9,7 +9,7 @@ const ExclusiveOffersFallback = () => {
       <h3 className={'px-app-padding font-semibold'}>Exclusive Offer</h3>
       <Carousel>
         <CarouselContent className={'pl-app-padding mr-app-padding gap-x-3'}>
-          {Array.from({ length: 3 })?.map((node, index) => (
+          {Array.from({ length: 4 })?.map((node, index) => (
             <ProductCardFallback key={`exclusive-offers-${index}`} />
           ))}
         </CarouselContent>

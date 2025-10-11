@@ -1,9 +1,9 @@
 import Header from './components/Header'
 import ProductListContainer from './components/ProductListContainer'
 import { Suspense } from 'react'
-import ProductsFallback from './components/ProductsFallback'
 import CustomBody from '@/components/shared/CustomBody'
 import { Metadata } from 'next'
+import ProductsFallback from './loading'
 
 type Props = {
   params: { category: string }
