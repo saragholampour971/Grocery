@@ -3,7 +3,7 @@ import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import ProductCard from '@/components/shared/ProductCard'
 import type { IProduct } from '@/app/api/products/type'
-import { cartService } from '@/store/cartService'
+import { cartService } from '@/service/cartService'
 
 type Props = {
   products: IProduct[]

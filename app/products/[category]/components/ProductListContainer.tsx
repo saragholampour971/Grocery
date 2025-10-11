@@ -1,7 +1,7 @@
 import React from 'react'
 import { ProductList } from './ProductList'
 import Image from 'next/image'
-import { productsService } from '@/store/productsService'
+import { productsService } from '@/service/productsService'
 
 type Props = {
   categoryId: string
@@ -17,6 +17,7 @@ export default async function ProductListContainer(props: Props) {
           className={'mx-auto'}
           src={'/img/no-data.jpg'}
           alt={'no-data'}
+          loading={'lazy'}
           width={300}
           height={400}
         />
