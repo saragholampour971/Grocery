@@ -1,13 +1,4 @@
-import {ApiResponse} from "../../../lib/globalTypes";
+import { ApiResponse } from '@/lib/globalTypes'
+import { IProduct } from '../products/type'
 
-export type ExclusiveOfferInfo = {
-  id: string,
-  title: string,
-  price: number,
-  imageUrl: string,
-  description: string,
-  category: string,
-
-}
-
-export type ExclusiveOffersResponse = ApiResponse<ExclusiveOfferInfo[]>
+export type ExclusiveOffersResponse = ApiResponse<IProduct[]>

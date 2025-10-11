@@ -1,24 +1,28 @@
-import React from 'react';
-import {ProductList} from "./ProductList";
-import Image from "next/image";
-import {productsService} from "@/store/productsService";
+import React from 'react'
+import { ProductList } from './ProductList'
+import Image from 'next/image'
+import { productsService } from '@/store/productsService'
 
 type Props = {
-  categoryId: string;
+  categoryId: string
 }
 
 export default async function ProductListContainer(props: Props) {
-  const data = await productsService.getProductsByCategoryId(props.categoryId);
+  const data = await productsService.getProductsByCategoryId(props.categoryId)
 
   if (!data?.data?.length)
     return (
       <div className={'text-center'}>
-        <Image className={'mx-auto'} src={'/img/no-data.jpg'} alt={'no-data'} width={300} height={400}/>
+        <Image
+          className={'mx-auto'}
+          src={'/img/no-data.jpg'}
+          alt={'no-data'}
+          width={300}
+          height={400}
+        />
         <h5 className={'font-semibold'}>Empty !</h5>
-      </div>)
+      </div>
+    )
 
-  return (
-    <ProductList products={data.data}/>
-  );
-};
-
+  return <ProductList products={data.data} />
+}

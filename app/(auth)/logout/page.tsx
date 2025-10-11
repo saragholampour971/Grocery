@@ -1,29 +1,29 @@
-"use client";
+'use client'
 
-import {useEffect} from "react";
-import {useRouter} from "next/navigation";
-import {useQueryClient} from "@tanstack/react-query";
-import {authService} from "../../../store/authService";
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { useQueryClient } from '@tanstack/react-query'
+import { authService } from '../../../store/authService'
 
 export default function LogoutPage() {
-  const router = useRouter();
-  const queryClient = useQueryClient();
+  const router = useRouter()
+  const queryClient = useQueryClient()
 
   useEffect(() => {
     const logout = async () => {
       try {
         await authService.logout()
 
-        queryClient.clear();
+        queryClient.clear()
 
-        router.replace("/");
+        router.replace('/')
       } catch (err) {
-        console.error("Logout failed:", err);
+        console.error('Logout failed:', err)
       }
-    };
+    }
 
-    logout();
-  }, [queryClient, router]);
+    logout()
+  }, [queryClient, router])
 
-  return <div>Logging out...</div>;
+  return <div>Logging out...</div>
 }

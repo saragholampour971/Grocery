@@ -1,9 +1,9 @@
-import {IProduct} from "../products/type";
-import {ApiResponse} from "../../../lib/globalTypes";
+import { IProduct } from '../products/type'
+import { ApiResponse } from '@/lib/globalTypes'
 
 export interface IPostParams {
-  productId: string;
-  quantity: number;
+  productId: string
+  quantity: number
 }
 
 export type ICartItem = IProduct & IPostParams

@@ -1,6 +1,6 @@
 export interface ErrorResponse {
-  error?: string;
+  error?: string
   status?: number
 }
 
-export type ApiResponse<T> = { data?: T } & ErrorResponse;
+export type ApiResponse<T> = { data?: T } & ErrorResponse

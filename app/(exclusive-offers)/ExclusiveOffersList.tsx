@@ -1,52 +1,51 @@
-"use client"
-import React from 'react';
-import {Carousel, CarouselContent, CarouselItem,} from "@/components/ui/carousel"
-import {ExclusiveOfferInfo} from "../api/exclusive-offers/type";
-import {Card, CardDescription, CardFooter, CardTitle} from "@/components/ui/card";
-import AddButton from "@/components/shared/AddButton";
-import Image from "next/image";
-import {price} from "../../lib/utils";
+'use client'
+import React, { useMemo } from 'react'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from '@/components/ui/carousel'
+import ProductCard from '@/components/shared/ProductCard'
+import { IProduct } from '../api/products/type'
+import { useQuery } from '@tanstack/react-query'
+import { cartService } from '@/service/cartService'
 
 type Props = {
-  data?: ExclusiveOfferInfo[]
+  products?: IProduct[]
 }
 
 const ExclusiveOffersList = (props: Props) => {
+  const { data: cart } = useQuery({
+    queryKey: ['cart'],
+    queryFn: cartService.getCart,
+    enabled: false,
+  })
+
+  const MapCart = useMemo(() => {
+    return new Map(cart?.data?.map((node) => [node.productId, node.quantity]))
+  }, [cart?.data])
+
+  const mergedProducts = useMemo(() => {
+    return props.products?.map((node) => ({
+      ...node,
+      cartQuantity: MapCart.get(node.id),
+    }))
+  }, [props.products, MapCart])
+
   return (
     <Carousel>
-      <CarouselContent className={'pl-app-padding mr-app-padding'}>
-        {props?.data?.map((node, index) =>
+      <CarouselContent className={'pl-app-padding gap-x-3.5 !mr-7'}>
+        {mergedProducts?.map((node, index) => (
           <CarouselItem
             key={`exclusive-offers-${index}`}
             className={'w-[173px] max-w-[173px] h-[249px] !min-h-[249px]'}
           >
-            <Card className={' w-full h-full flex flex-col items-stretch '}>
-              <div className={'relative w-[90%] h-[100px] mx-auto'}>
-                <Image
-                  src={node.imageUrl}
-                  alt={node.imageUrl}
-                  fill
-                  loading={'lazy'}
-                  className={'p-2 object-contain object-center'}
-                />
-
-              </div>
-
-              <CardTitle className={'!text-[15px] pb-1 pt-3 text-wrap leading-5'}>
-                {node.title}
-              </CardTitle>
-              <CardDescription>{node.description}</CardDescription>
-              <CardFooter
-                className={'!p-0 flex !h-content items-center justify-between mt-auto'}>
-                <p className={'font-semibold'}>{price(node.price)}</p>
-                <AddButton/>
-              </CardFooter>
-            </Card>
+            <ProductCard product={node} quantity={node.cartQuantity} />
           </CarouselItem>
-        )}
+        ))}
       </CarouselContent>
     </Carousel>
-  );
-};
+  )
+}
 
-export default ExclusiveOffersList;
+export default ExclusiveOffersList
