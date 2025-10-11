@@ -17,7 +17,6 @@ type Props = {
 
 const ExclusiveOffersList = (props: Props) => {
   const { uid } = useUserStore()
-  console.log(uid, '""""')
   const { data: cart } = useQuery({
     queryKey: ['cart'],
     queryFn: cartService.getCart,

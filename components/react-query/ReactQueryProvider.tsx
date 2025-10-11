@@ -34,7 +34,6 @@ export default function ReactQueryProvider({
         mutations: {
           retry: false,
           onError: (error) => {
-            console.log('sara', error)
             if (error.message == 'Unauthorized')
               router.push(`/login?redirect=${encodeURIComponent(pathname)}`)
             else {

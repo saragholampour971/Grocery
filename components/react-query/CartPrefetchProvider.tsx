@@ -12,7 +12,6 @@ interface CartPrefetchProviderProps {
 export function CartPrefetchProvider({ children }: CartPrefetchProviderProps) {
   const queryClient = useQueryClient()
   const userId = useUserStore((st) => st.uid)
-  console.log('user is', userId)
   useEffect(() => {
     const prefetchCart = async () => {
       if (userId) {
