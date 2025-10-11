@@ -8,6 +8,7 @@ const NoData = () => {
     <div>
       <div className={'relative w-3/4 h-[calc(100vw/1.4)] m-auto'}>
         <Image
+          loading={'lazy'}
           src={'/img/empty-bill.png'}
           alt={'empty bill'}
           fill
