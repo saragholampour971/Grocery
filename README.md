@@ -18,7 +18,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [
 - use priority and lazy load for images
 - use optimistic update for shopping cart
 
-<img src="public/preview/home-preview.png" alt="home page" width="50%" />
-<img src="public/preview/explore-preview.png" alt="explore page" width="50%" />
-<img src="public/preview/products-fallback-preview.png" alt="explore page" width="50%" />
-<img src="public/preview/products-preview.png" alt="explore page" width="50%" />
+<img src="public/preview/home-preview.png" alt="home page" width="40%" />
+<img src="public/preview/explore-preview.png" alt="explore page" width="40%" />
+<img src="public/preview/products-fallback-preview.png" alt="products fallback page" width="40%" />
+<img src="public/preview/products-preview.png" alt="products page" width="40%" />
+<img src="public/preview/cart-preview.png" alt="cart page" width="40%" />
+<img src="public/preview/login-preview.png" alt="cart page" width="40%" />

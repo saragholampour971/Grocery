@@ -6,6 +6,7 @@ import CustomBody from '@/components/shared/CustomBody'
 import NoData from './no-data'
 import { cartService } from '@/service/cartService'
 import ProductsFallback from '../products/[category]/loading'
+import TotalRow from './total'
 
 export default function Cart() {
   const { data: cartValue, isLoading } = useQuery({
@@ -45,6 +46,7 @@ export default function Cart() {
           </div>
         )}
       </CustomBody>
+      <TotalRow />
     </>
   )
 }
