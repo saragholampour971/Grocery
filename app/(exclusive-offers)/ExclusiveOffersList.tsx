@@ -9,16 +9,19 @@ import ProductCard from '@/components/shared/ProductCard'
 import { IProduct } from '../api/products/type'
 import { useQuery } from '@tanstack/react-query'
 import { cartService } from '@/service/cartService'
+import useUserStore from '../../lib/store/userStore'
 
 type Props = {
   products?: IProduct[]
 }
 
 const ExclusiveOffersList = (props: Props) => {
+  const { uid } = useUserStore()
+  console.log(uid, '""""')
   const { data: cart } = useQuery({
     queryKey: ['cart'],
     queryFn: cartService.getCart,
-    enabled: false,
+    enabled: !!uid,
   })
 
   const MapCart = useMemo(() => {

@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useQueryClient } from '@tanstack/react-query'
-import { authService } from '../../../store/authService'
+import { authService } from '@/service/authService'
 
 export default function LogoutPage() {
   const router = useRouter()
@@ -17,6 +17,7 @@ export default function LogoutPage() {
         queryClient.clear()
 
         router.replace('/')
+        router.refresh()
       } catch (err) {
         console.error('Logout failed:', err)
       }

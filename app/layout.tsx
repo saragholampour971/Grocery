@@ -9,7 +9,7 @@ import { CartPrefetchProvider } from '../components/react-query/CartPrefetchProv
 import LoggedInUserProvider from '../components/react-query/LoggedInUserProvider'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'], display: 'swap' })
 
 export const metadata: Metadata = {
   title: 'Grocery App',

@@ -3,7 +3,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from 'firebase/auth'
-import { MeResponse } from '../app/api/(auth)/type'
+import { MeResponse } from '@/app/api/(auth)/type'
+import useUserStore from '@/lib/store/userStore'
 
 async function setTokenCookie(token: string) {
   return await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/login`, {
@@ -18,7 +19,9 @@ export const authService = {
     const { user } = await signInWithEmailAndPassword(auth, email, password)
     const token = await auth.currentUser?.getIdToken()
     if (token) {
-      await setTokenCookie(token)
+      await setTokenCookie(token).then(() => {
+        useUserStore.setState({ uid: user.uid, email: user.email })
+      })
     }
 
     return user
