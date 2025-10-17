@@ -9,7 +9,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [
 |        DB        | firebase    |
 |     rest api     | api routing |
 
-- service layer for centralize ,Easier Updates
+- service layer and DAL for centralize ,Easier Updates
 - custom fetch func for check authenticate user in some scenario
 - middle ware to check Auth in some route group
 - use streaming for reduce TTFB
