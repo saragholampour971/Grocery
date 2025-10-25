@@ -1,18 +1,22 @@
 'use client'
-import React, { useRef } from 'react'
+import React, { use, useRef } from 'react'
 import Image from 'next/image'
 import logo from '@/public/svg/logo.svg'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useMutation } from '@tanstack/react-query'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { authService } from '../../../service/authService'
+import { useRouter } from 'next/navigation'
+import { authService } from '@/service/authService'
 
-const Login = () => {
+type Props = {
+  searchParams: Promise<{ redirect?: string }>
+}
+const Login = (props: Props) => {
+  const redirectTo = use(props.searchParams)?.redirect || '/'
+
   const formRef = useRef<HTMLFormElement>(null)
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const redirectTo = searchParams.get('redirect')
+  // const redirectTo = searchParams.get('redirect')
 
   const loginMutation = useMutation({
     mutationFn: handleLogin,

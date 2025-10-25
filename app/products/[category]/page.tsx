@@ -6,17 +6,19 @@ import { Metadata } from 'next'
 import ProductsFallback from './loading'
 
 type Props = {
-  params: { category: string }
+  params: Promise<{ category: string }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const categoryName = (await params).category.split('-')[0]
+  const { category } = await params
+
+  const categoryName = category.split('-')[0]
 
   return { title: decodeURIComponent(categoryName) }
 }
 
 export default async function ProductsOfCategory(props: Props) {
-  const [categoryName, categoryId] = props.params.category.split('-')
+  const [categoryName, categoryId] = (await props.params).category.split('-')
 
   return (
     <>
