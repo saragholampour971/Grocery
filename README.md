@@ -17,9 +17,12 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [
 - generate metadata for better SEO
 - use priority and lazy load for images
 - use optimistic update for shopping cart
-- verify token func will be cache for decrease duplicate verify token on same route (by react cache func)
+- verify token func cached for decrease duplicate verify token on same route (by react cache func)
 - loggedIn user will be accessed by zustand store on hole app
 - use broadcast channel & persist plugin for share query cache between tabs in browser(in progress...)
+- generate Swagger to Document Api's (in progress...)
+- migrate from typescript to Zone (in progress...)
+- add PWA (...in progress...)
 
 <img src="public/preview/home-preview.png" alt="home page" width="40%" />
 <img src="public/preview/explore-preview.png" alt="explore page" width="40%" />
