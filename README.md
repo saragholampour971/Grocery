@@ -21,8 +21,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [
 - loggedIn user will be accessed by zustand store on hole app
 - use broadcast channel & persist plugin for share query cache between tabs in browser(in progress...)
 - generate Swagger to Document Api's (in progress...)
-- migrate from typescript to Zone (in progress...)
-- add PWA (...in progress...)
+- add Zod (in progress...)
+- add PWA (n progress...)
 
 <img src="public/preview/home-preview.png" alt="home page" width="40%" />
 <img src="public/preview/explore-preview.png" alt="explore page" width="40%" />
