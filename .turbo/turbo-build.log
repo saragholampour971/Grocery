@@ -1,25 +1,53 @@
-[2J[m[H]0;C:\WINDOWS\system32\cmd.exe [?25h[25l [1m[93m⚠[m Warning: Next.js inferred your workspace root, but it may not be correct.[K
- We detected multiple lockfiles and selected the directory of G:\next\Grocery-repo\package-lock.json as the root direc
-tory.[K
- To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfile
-s if it's not needed.[K
-   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.[K
- Detected additional lockfiles: [K
-   * G:\next\Grocery-repo\apps\Grocery-frontend\package-lock.json[K[10;1H[?25h   [1m[38;2;173;127;168m▲ Next.js 15.5.6
-[25l[m   - Environments: .env.local[13;1H[?25h [1m[97m [m Creating an optimized production build ...
- [1m[92m✓[m Compiled successfully in 6.7s
- [1m[97m [m Linting and checking validity of types  [36m.[?25l[m[K[118C [1m[97m [m Linting and checking validity of types  [36m..[m[K[118C [1m[97m [m Linting and checking validity of types  [36m...[m[K[118C [1m[97m [m Linting and checking validity of types  [36m.[m[K[118C [1m[97m [m Linting and checking validity of types  [36m..[m[K[118C [1m[97m [m Linting and checking validity of types  [36m...[m[K[118C [1m[97m [m Linting and checking validity of types  [36m.[m[K[118C [1m[97m [m Linting and checking validity of types  [36m..[m[K[118C [1m[97m [m Linting and checking validity of types  [36m...[m[K[118C [1m[97m [m Linting and checking validity of types  [36m.[m[K[118C [1m[97m [m Linting and checking validity of types  [36m..[m[K[118C [1m[97m [m Linting and checking validity of types  [36m...[m[K[118C [1m[97m [m Linting and checking validity of types  [36m.[m[K[118C [1m[97m [m Linting and checking validity of types  [36m..[m[K[118C [1m[97m [m Linting and checking validity of types  [36m...[m[K[118C [1m[97m [m Linting and checking validity of types  [36m.[m[K[118C [1m[97m [m Linting and checking validity of types  [36m..[m[K[118C [1m[97m [m Linting and checking validity of types  [36m...[m [1m[97m [m Linting and checking validity of types  [36m...[m ⨯ ESLint: Config (unnamed): Key "plugins": This appears to be in eslint
-rc format (array of strings) rather than flat config format (object).[K[49C
-[K[118C [1m[97m [m Linting and checking validity of types  [36m.[m[K[118C [1m[97m [m Linting and checking validity of types  [36m..[m[K[118C [1m[97m [m Linting and checking validity of types  [36m...[m[K[118C [1m[97m [m Linting and checking validity of types  [36m.[m[K[118C [1m[97m [m Linting and checking validity of types  [36m..[m[K[118C [1m[97m [m Linting and checking validity of types  [36m...[m[K[118C [1m[97m [m Linting and checking validity of types  [36m.[m[K[118C [1m[97m [m Linting and checking validity of types  [36m..[m[K[118C [1m[97m [m Linting and checking validity of types  [36m...[m[K[118C [1m[97m [m Linting and checking validity of types  [36m.[m[K[118C [1m[97m [m Linting and checking validity of types  [36m..[m[K[118C [1m[97m [m Linting and checking validity of types  [36m...[m[K[118C [1m[97m [m Linting and checking validity of types  [36m.[m[K[118C [1m[97m [m Linting and checking validity of types  [36m..[m[K[118C [1m[97m [m Linting and checking validity of types  [36m...[m[K[118C [1m[97m [m Linting and checking validity of types  [36m.[m[K[118C [1m[97m [m Linting and checking validity of types  [36m..[m[K[118C [1m[97m [m Linting and checking validity of types  [36m...[m[K[118C [1m[97m [m Linting and checking validity of types  [36m.[m[K[118C [1m[97m [m Linting and checking validity of types  [36m..[m[K[118C [1m[92m✓[m Linting and checking validity of types    
- [1m[97m [m Collecting page data  [36m.[m[19X[19C[K[118C [1m[97m [m Collecting page data  [36m..[m[K[118C [1m[97m [m Collecting page data  [36m...[m[K[118C [1m[97m [m Collecting page data  [36m.[m[K[118C [1m[97m [m Collecting page data  [36m..[m[K[118C [1m[97m [m Collecting page data  [36m...[m[K[118C [1m[97m [m Collecting page data  [36m.[m[K[118C [1m[97m [m Collecting page data  [36m..[m[K[118C [1m[97m [m Collecting page data  [36m...[m[K[118C [1m[97m [m Collecting page data  [36m.[m[K[118C [1m[97m [m Collecting page data  [36m..[m[K[118C [1m[97m [m Collecting page data  [36m...[m[K[118C [1m[97m [m Collecting page data  [36m.[m[K[118C [1m[92m✓[m Collecting page data    
-[?25hgov-Data: { hello: 'gov-world' }
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of G:\next\Grocery-repo\package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * G:\next\Grocery-repo\apps\Grocery-frontend\package-lock.json
+
+   ▲ Next.js 15.5.6
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 10.6s
+   Linting and checking validity of types ...
+ ⨯ ESLint: Config (unnamed): Key "plugins": This appears to be in eslintrc format (array of strings) rather than flat config format (object).
+   Collecting page data ...
 gov-Data: { hello: 'gov-world' }
 gov-Data: { hello: 'gov-world' }
-[?25l [1m[97m [m Generating static pages (0/15)  [36m[    ][m[K[118C [1m[97m [m Generating static pages (0/15)  [36m[=   ][m[K[118C [1m[97m [m Generating static pages (0/15)  [36m[==  ][m[K[118C [1m[97m [m Generating static pages (0/15)  [36m[=== ][m[K[118C [1m[97m [m Generating static pages (0/15)  [36m[ ===][m[K[118C [1m[97m [m Generating static pages (0/15)  [36m[  ==][m[K[118C [1m[97m [m Generating static pages (1/15)  [36m[   =][m[K[118C [1m[97m [m Generating static pages (1/15)  [36m[    ][m[K[118C [1m[97m [m Generating static pages (1/15)  [36m[   =][m[K[118C [1m[97m [m Generating static pages (1/15)  [36m[  ==][m[K[118C [1m[97m [m Generating static pages (2/15)  [36m[ ===][m[K[118C [1m[97m [m Generating static pages (5/15)  [36m[====][m[K[118C [1m[97m [m Generating static pages (9/15)  [36m[=== ][m[K[118C [1m[97m [m Generating static pages (10/15)  [36m[==  ][mError occurred prerendering page "/explore". Read more: https://nextjs.org/docs/messages/prerender-error[K
-TypeError: fetch failed[K[?25h
-    at async l (G:\next\Grocery-repo\apps\Grocery-frontend\.next\server\app\explore\page.js:1:730) {
-  digest: '3735008289',
-  [cause]: [AggregateError: ] { code: 'ECONNREFUSED' }
-}
-Export encountered an error on /explore/page: /explore, exiting the build.
- [1m[91m⨯[m Next.js build worker exited with code: 1 and signal: null
+gov-Data: { hello: 'gov-world' }
+   Generating static pages (0/15) ...
+   Generating static pages (3/15) 
+   Generating static pages (7/15) 
+   Generating static pages (11/15) 
+ ✓ Generating static pages (15/15)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS  Revalidate  Expire
+┌ ○ /                                    11.7 kB         136 kB          1m      1y
+├ ○ /_not-found                            995 B         103 kB
+├ ƒ /api/banner                            145 B         102 kB
+├ ƒ /api/cart                              145 B         102 kB
+├ ƒ /api/category                          145 B         102 kB
+├ ƒ /api/exclusive-offers                  145 B         102 kB
+├ ƒ /api/login                             145 B         102 kB
+├ ƒ /api/logout                            145 B         102 kB
+├ ƒ /api/me                                145 B         102 kB
+├ ƒ /api/products/[categoryId]             145 B         102 kB
+├ ○ /cart                                2.24 kB         134 kB
+├ ○ /explore                               173 B         110 kB
+├ ƒ /login                                4.4 kB         217 kB
+├ ○ /logout                               1.2 kB         197 kB
+└ ƒ /products/[category]                 1.87 kB         130 kB
++ First Load JS shared by all             102 kB
+  ├ chunks/255-2f614fc23c25b14d.js       45.5 kB
+  ├ chunks/4bd1b696-382748cc942d8a14.js  54.2 kB
+  └ other shared chunks (total)          2.03 kB
+
+
+ƒ Middleware                             33.2 kB
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
