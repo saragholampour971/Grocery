@@ -8,8 +8,8 @@ import { IProduct } from '@/app/api/products/type'
 import MinusButton from './MinusButton'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { cartService } from '@/service/cartService'
-import { CartResponse } from '@/app/api/cart/type'
-import Loading from '../../public/svg/loading'
+import { CartResponse, ICartItem } from '@grocery-repo/schemas'
+import Loading from '@/public/svg/loading'
 
 type Props = {
   product: IProduct
@@ -34,7 +34,10 @@ const ProductCard = (props: Props) => {
 
         if (index > -1) {
           if (variables.quantity > 0) {
-            copy[index] = { ...copy[index], quantity: variables.quantity }
+            //TODO: fix it
+            copy[index] = {
+              ...copy[index],
+            } as ICartItem
           } else {
             copy.splice(index, 1)
           }

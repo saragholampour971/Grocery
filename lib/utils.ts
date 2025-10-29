@@ -12,18 +12,13 @@ export const hexToRgba = (
   if (!hex) return 'rgba(0, 0, 0, 0.3)'
   const cleanHex = hex.replace('#', '')
   const isShortHex = cleanHex.length === 3
-  const r = parseInt(
-    isShortHex ? cleanHex[0] + cleanHex[0] : cleanHex.substring(0, 2),
-    16
-  )
-  const g = parseInt(
-    isShortHex ? cleanHex[1] + cleanHex[1] : cleanHex.substring(2, 4),
-    16
-  )
-  const b = parseInt(
-    isShortHex ? cleanHex[2] + cleanHex[2] : cleanHex.substring(4, 6),
-    16
-  )
+  const one = cleanHex[0] || ''
+  const two = cleanHex[1] || ''
+  const three = cleanHex[2] || ''
+  
+  const r = parseInt(isShortHex ? one + one : cleanHex.substring(0, 2), 16)
+  const g = parseInt(isShortHex ? two + two : cleanHex.substring(2, 4), 16)
+  const b = parseInt(isShortHex ? three + three : cleanHex.substring(4, 6), 16)
   return `rgba(${r}, ${g}, ${b}, ${opacity})`
 }
 

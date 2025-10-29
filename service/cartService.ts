@@ -1,5 +1,5 @@
-import { CartResponse } from '../app/api/cart/type'
-import { fetchWithAuth } from '../lib/fetchWithAuth'
+import { fetchWithAuth } from '@/lib/fetchWithAuth'
+import { CartResponse } from '@grocery-repo/schemas'
 
 export const cartService = {
   // GET cart

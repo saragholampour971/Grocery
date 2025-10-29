@@ -12,13 +12,14 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category } = await params
 
-  const categoryName = category.split('-')[0]
-
+  const categoryName = category.split('-')[0] ?? ''
   return { title: decodeURIComponent(categoryName) }
 }
 
 export default async function ProductsOfCategory(props: Props) {
-  const [categoryName, categoryId] = (await props.params).category.split('-')
+  const [categoryName = '', categoryId = ''] = (
+    await props.params
+  ).category.split('-')
 
   return (
     <>

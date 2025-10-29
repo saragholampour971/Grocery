@@ -4,16 +4,14 @@ import { NextResponse } from 'next/server'
 
 export async function GET(
   req: Request,
-  {
-    params,
-  }: {
-    params: { categoryId: string }
-  }
+  context: { params: Promise<{ categoryId: string }> }
+
 ): Promise<NextResponse<ProductResponse>> {
   try {
+    const { categoryId } = await context.params
     const productsSnapshot = await adminDb
       .collection('products')
-      .where('categoryId', '==', params.categoryId)
+      .where('categoryId', '==',categoryId)
       .get()
 
     const products: IProduct[] = await Promise.all(

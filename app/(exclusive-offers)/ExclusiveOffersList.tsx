@@ -5,11 +5,15 @@ import {
   CarouselContent,
   CarouselItem,
 } from '@/components/ui/carousel'
-import ProductCard from '@/components/shared/ProductCard'
 import { IProduct } from '../api/products/type'
 import { useQuery } from '@tanstack/react-query'
 import { cartService } from '@/service/cartService'
-import useUserStore from '../../lib/store/userStore'
+import useUserStore from '@/lib/store/userStore'
+import dynamic from 'next/dynamic'
+
+const ProductCard = dynamic(() => import('@/components/shared/ProductCard'), {
+  ssr: false,
+})
 
 type Props = {
   products?: IProduct[]
