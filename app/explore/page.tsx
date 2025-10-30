@@ -1,10 +1,10 @@
 import React from 'react'
-import { CategoryResponse } from '@/app/api/category/type'
 import { Card, CardTitle } from '@/components/ui/card'
 import Image from 'next/image'
 import Link from 'next/link'
 import { hexToRgba } from '@/lib/utils'
-import CustomBody from '../../components/shared/CustomBody'
+import CustomBody from '@/components/shared/CustomBody'
+import { productsService } from '@/service/productsService'
 
 const colors = [
   '#53B175',
@@ -16,11 +16,7 @@ const colors = [
 ]
 
 export default async function Explore() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/category`, {
-    cache: 'force-cache',
-  })
-  const json: CategoryResponse = await res.json()
-  const data = json?.data
+  const { data } = await productsService.getCategories()
 
   const borderColors = Array.isArray(data)
     ? data?.map((_, index) => colors[index % colors.length])?.reverse()

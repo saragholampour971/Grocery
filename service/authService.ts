@@ -3,7 +3,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from 'firebase/auth'
-import { MeResponse } from '@/app/api/(auth)/type'
+import { MeResponse } from '@grocery-repo/schemas'
 import useUserStore from '@/lib/store/userStore'
 
 async function setTokenCookie(token: string) {

@@ -13,7 +13,7 @@ export default function LoggedInUserProvider(props: PropsWithChildren) {
     staleTime: Infinity,
   })
   useEffect(() => {
-    if (data) {
+    if (data?.data) {
       setUser(data.data)
     }
   }, [data, setUser])

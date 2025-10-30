@@ -2,11 +2,11 @@
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import ProductCard from '@/components/shared/ProductCard'
-import type { IProduct } from '@/app/api/products/type'
+import type { ProductType } from '@grocery-repo/schemas'
 import { cartService } from '@/service/cartService'
 
 type Props = {
-  products: IProduct[]
+  products: ProductType[]
 }
 
 export function ProductList({ products }: Props) {

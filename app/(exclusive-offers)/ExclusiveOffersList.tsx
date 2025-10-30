@@ -5,7 +5,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from '@/components/ui/carousel'
-import { IProduct } from '../api/products/type'
+import { ProductType } from '@grocery-repo/schemas'
 import { useQuery } from '@tanstack/react-query'
 import { cartService } from '@/service/cartService'
 import useUserStore from '@/lib/store/userStore'
@@ -16,7 +16,7 @@ const ProductCard = dynamic(() => import('@/components/shared/ProductCard'), {
 })
 
 type Props = {
-  products?: IProduct[]
+  products?: ProductType[]
 }
 
 const ExclusiveOffersList = (props: Props) => {

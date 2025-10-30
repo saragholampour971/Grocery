@@ -4,15 +4,14 @@ import { Card, CardDescription, CardTitle } from '../ui/card'
 import Image from 'next/image'
 import { price } from '@/lib/utils'
 import AddButton from './AddButton'
-import { IProduct } from '@/app/api/products/type'
+import { CartItemType, CartResponse, ProductType } from '@grocery-repo/schemas'
 import MinusButton from './MinusButton'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { cartService } from '@/service/cartService'
-import { CartResponse, ICartItem } from '@grocery-repo/schemas'
 import Loading from '@/public/svg/loading'
 
 type Props = {
-  product: IProduct
+  product: ProductType
   quantity?: number
 }
 const ProductCard = (props: Props) => {
@@ -37,7 +36,7 @@ const ProductCard = (props: Props) => {
             //TODO: fix it
             copy[index] = {
               ...copy[index],
-            } as ICartItem
+            } as CartItemType
           } else {
             copy.splice(index, 1)
           }
@@ -49,17 +48,17 @@ const ProductCard = (props: Props) => {
       return { lastCart }
     },
 
-    onSettled: (data, error, variables, onMutateResult, context) => {
+    onSettled: (data, error, variables, onMutateResult) => {
       if (onMutateResult?.lastCart && error) {
         alert(1)
         queryClient.setQueryData(['cart'], onMutateResult?.lastCart)
-        queryClient.invalidateQueries({ queryKey: ['cart'] })
+        queryClient.invalidateQueries({ queryKey: ['cart'] }).then()
       }
       // if new product added to cart we need to reFetch cart to
       // join cart with product table and get all field of that product in cart
       else if (variables.quantity == 1 && !quantity) {
         alert(2)
-        queryClient.invalidateQueries({ queryKey: ['cart'] })
+        queryClient.invalidateQueries({ queryKey: ['cart'] }).then()
       }
     },
   })

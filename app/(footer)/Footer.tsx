@@ -68,7 +68,7 @@ const navigations = [
 const Footer = () => {
   return (
     <div
-      className="fixed px-7 bg-white !h-mobile-navbar-height rounded-t-3xl shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] bottom-0 left-0 right-0 border flex justify-between items-center z-100"
+      className="sticky px-7 bg-white !h-mobile-navbar-height rounded-t-3xl shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] bottom-0 left-0 right-0 border flex justify-between items-center z-100"
       dir="rtl"
     >
       {navigations.map((node, index) => (

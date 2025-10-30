@@ -1,13 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
-import { BannerResponse } from '@/app/api/banner/type'
+import { homeService } from '@/service/homeService'
 
 export default async function Banner() {
-  const data = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/banner`, {
-    next: { revalidate: 60 },
-  })
-  const json = (await data.json()) as BannerResponse
-
+  const { data } = await homeService.getBanners()
   return (
     <div className={'px-app-padding'}>
       <div
@@ -15,9 +11,9 @@ export default async function Banner() {
           'relative w-full max-h-[200px] h-[calc(100vw/3)] rounded-md shadow-md'
         }
       >
-        {Array.isArray(json?.data) ? (
+        {Array.isArray(data) ? (
           <Image
-            src={json?.data[0]?.imageUrl || ''}
+            src={data?.[0]?.imageUrl || ''}
             alt={'banner'}
             fill
             priority

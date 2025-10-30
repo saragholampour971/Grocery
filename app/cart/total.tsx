@@ -11,6 +11,7 @@ const TotalRow = () => {
     queryFn: cartService.getCart,
     enabled: false,
   })
+
   useEffect(() => {
     if (data?.data?.length) {
       setTotalPrice(

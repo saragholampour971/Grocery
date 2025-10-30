@@ -1,8 +1,8 @@
 import { create } from 'zustand'
-import { User } from '../../app/api/(auth)/type'
+import { Me } from '@grocery-repo/schemas'
 
-type UserStore = User & {
-  setUser: (user: User) => void
+type UserStore = Me & {
+  setUser: (user: Me) => void
 }
 
 const useUserStore = create<UserStore>((set) => ({
