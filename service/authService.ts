@@ -3,15 +3,20 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from 'firebase/auth'
-import { MeResponse } from '@grocery-repo/schemas'
+import { LoginSchema, MeSchema, VoidSchema } from '@grocery-repo/schemas'
 import useUserStore from '@/lib/store/userStore'
+import { fetchApi } from '@/lib/fetchApi'
 
 async function setTokenCookie(token: string) {
-  return await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ token: token }),
-  })
+  return await fetchApi(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/login`,
+    LoginSchema,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: token }),
+    }
+  )
 }
 
 export const authService = {
@@ -35,12 +40,18 @@ export const authService = {
   },
 
   async logout() {
-    await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/logout`, {
-      method: 'POST',
-    })
+    await fetchApi(
+      `${process.env.NEXT_PUBLIC_SITE_URL}/api/logout`,
+      VoidSchema,
+      {
+        method: 'POST',
+      }
+    )
   },
-  async me(): Promise<MeResponse> {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/me`)
-    return await res.json()
+  async me() {
+    return await fetchApi(
+      `${process.env.NEXT_PUBLIC_SITE_URL}/api/me`,
+      MeSchema
+    )
   },
 }

@@ -1,32 +1,32 @@
 import {
-  CategoryResponse,
-  ExclusiveOffersResponseType,
-  ProductsResponseType,
+  CategoriesSchema,
+  ExclusiveOffersSchema,
+  ProductsSchema,
 } from '@grocery-repo/schemas'
-import { fetchWithAuth } from '@/lib/fetchWithAuth'
+import { fetchApi } from '@/lib/fetchApi'
 
 export const productsService = {
   async getProductsByCategoryId(categoryId: string) {
-    const res = await fetch(
+    return await fetchApi(
       `${process.env.NEXT_PUBLIC_SITE_URL}/api/products/${categoryId}`,
+      ProductsSchema,
       { next: { revalidate: 60 } }
     )
-    const data: ProductsResponseType = await res.json()
-    return data
   },
 
-  async getExclusiveOffers(): Promise<ExclusiveOffersResponseType> {
-    const res = await fetch(
+  async getExclusiveOffers() {
+    return await fetchApi(
       `${process.env.NEXT_PUBLIC_SITE_URL}/api/exclusive-offers`,
+      ExclusiveOffersSchema,
       {
         next: { revalidate: 60 },
       }
     )
-    return await res.json()
   },
-  async getCategories(): Promise<CategoryResponse> {
-    return await fetchWithAuth(
+  async getCategories() {
+    return await fetchApi(
       `${process.env.NEXT_PUBLIC_SITE_URL}/api/category`,
+      CategoriesSchema,
       {
         cache: 'force-cache',
       }

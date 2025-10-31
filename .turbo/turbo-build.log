@@ -9,7 +9,7 @@
    - Environments: .env.local
 
    Creating an optimized production build ...
- ✓ Compiled successfully in 8.7s
+ ✓ Compiled successfully in 9.5s
    Linting and checking validity of types ...
  ⨯ ESLint: Config (unnamed): Key "plugins": This appears to be in eslintrc format (array of strings) rather than flat config format (object).
    Collecting page data ...
@@ -22,13 +22,13 @@
    Collecting build traces ...
 
 Route (app)                                 Size  First Load JS  Revalidate  Expire
-┌ ○ /                                    11.7 kB         136 kB          1m      1y
+┌ ○ /                                    12.1 kB         149 kB          1m      1y
 ├ ○ /_not-found                            995 B         103 kB
-├ ○ /cart                                2.24 kB         134 kB
+├ ○ /cart                                2.56 kB         147 kB
 ├ ○ /explore                               173 B         110 kB
-├ ƒ /login                                4.4 kB         217 kB
-├ ○ /logout                               1.2 kB         197 kB
-└ ƒ /products/[category]                 1.87 kB         130 kB
+├ ƒ /login                               4.86 kB         231 kB
+├ ○ /logout                              1.46 kB         211 kB
+└ ƒ /products/[category]                 2.19 kB         144 kB
 + First Load JS shared by all             102 kB
   ├ chunks/255-2f614fc23c25b14d.js       45.5 kB
   ├ chunks/4bd1b696-382748cc942d8a14.js  54.2 kB

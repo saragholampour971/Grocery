@@ -4,7 +4,12 @@ import { Card, CardDescription, CardTitle } from '../ui/card'
 import Image from 'next/image'
 import { price } from '@/lib/utils'
 import AddButton from './AddButton'
-import { CartItemType, CartResponse, ProductType } from '@grocery-repo/schemas'
+import {
+  CartItemType,
+  CartSchema,
+  ProductType,
+  SuccessResponseType,
+} from '@grocery-repo/schemas'
 import MinusButton from './MinusButton'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { cartService } from '@/service/cartService'
@@ -20,30 +25,38 @@ const ProductCard = (props: Props) => {
 
   const addMutation = useMutation({
     mutationFn: (prp: { productId: string; quantity: number }) => {
-      return cartService.addToCart(prp.productId, prp.quantity)
+      return cartService.addToCart({
+        productId: prp.productId,
+        quantity: prp.quantity,
+      })
     },
     onMutate: async (variables: { productId: string; quantity: number }) => {
-      const lastCart = queryClient.getQueryData<CartResponse>(['cart'])
+      const lastCart = queryClient.getQueryData<
+        SuccessResponseType<typeof CartSchema>
+      >(['cart'])
       // Optimistic update
-      queryClient.setQueryData<CartResponse>(['cart'], (prev) => {
-        const copy = [...(prev?.data || [])]
-        const index = copy.findIndex(
-          (node) => node.productId === variables.productId
-        )
+      queryClient.setQueryData<SuccessResponseType<typeof CartSchema>>(
+        ['cart'],
+        (prev) => {
+          const copy = [...(prev?.data || [])]
+          const index = copy.findIndex(
+            (node) => node.productId === variables.productId
+          )
 
-        if (index > -1) {
-          if (variables.quantity > 0) {
-            //TODO: fix it
-            copy[index] = {
-              ...copy[index],
-            } as CartItemType
-          } else {
-            copy.splice(index, 1)
+          if (index > -1) {
+            if (variables.quantity > 0) {
+              //TODO: fix it
+              copy[index] = {
+                ...copy[index],
+              } as CartItemType
+            } else {
+              copy.splice(index, 1)
+            }
           }
-        }
 
-        return { data: copy }
-      })
+          return { data: copy }
+        }
+      )
 
       return { lastCart }
     },
