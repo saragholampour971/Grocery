@@ -1,5 +1,8 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [
-`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org/) project
+
+this project is part of a [monorepo](
+https://github.com/saragholampour971/grocery-monorepo?tab=readme-ov-file
+)
 
 | state management | zustand     |
 |:----------------:|-------------|
@@ -20,8 +23,6 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [
 - verify token func cached for decrease duplicate verify token on same route (by react cache func)
 - loggedIn user will be accessed by zustand store on hole app
 - use broadcast channel & persist plugin for share query cache between tabs in browser(in progress...)
-- generate Swagger to Document Api's (in progress...)
-- add Zod (in progress...)
 - add PWA (n progress...)
 
 <img src="public/preview/home-preview.png" alt="home page" width="40%" />
