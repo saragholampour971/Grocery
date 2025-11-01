@@ -12,16 +12,13 @@ https://github.com/saragholampour971/grocery-monorepo?tab=readme-ov-file
 |        DB        | firebase    |
 |     rest api     | api routing |
 
-- service layer and DAL for centralize ,Easier Updates
-- custom fetch func for check authenticate user in some scenario
 - middle ware to check Auth in some route group
-- use streaming for reduce TTFB
-- use custom fallback to control shift layout
-- generate metadata for better SEO
-- use priority and lazy load for images
-- use optimistic update for shopping cart
-- verify token func cached for decrease duplicate verify token on same route (by react cache func)
-- loggedIn user will be accessed by zustand store on hole app
+- use streaming for reduce **TTFB**
+- use custom fallback to control **layout shift**
+- generate metadata for better **SEO**
+- use priority and **lazy load** for images
+- use **optimistic update** for shopping cart
+- loggedIn user will be accessed by **zustand** store on hole app
 - use broadcast channel & persist plugin for share query cache between tabs in browser(in progress...)
 - add PWA (n progress...)
 
